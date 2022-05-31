@@ -2,13 +2,7 @@
 A Node.js-based daemon that refreshes Azure DNS records based on the detected WAN IP of the local network to the executing device. Useful for maintaining up-to-date DNS records which are pointing networks whose WAN IPs are dynamic in nature (think home networks).
 
 ## Installation and configuration
-> These instructions assume that you already have a working Azure DNS zone. If the specific record targeted by the value you provide in `.env` doesn't exist within the specified DNS zone, it will be created for you.
-
-### Azure set-up
-1. Sign in to the [Azure portal](https://portal.azure.com) and navigate to the page for the Resource Group in which the target DNS zone has been provisioned
-
-### Canary set-up
-2. 
+*To be completed - documentation work is ongoing in the `docs/installation` branch.*
 
 ## To-dos
 
