@@ -1,3 +1,13 @@
+/**
+ * azure-dynamic-dns
+ * by Sean F Quinn <sean@sfq.xyz>
+ * 
+ * A simple, daemonize-able Node.js script that updates DNS records in Azure DNS based on the currently-detected WAN IP for the network local to the device on which the service is running.
+ * For installation/configuration information, see README.md
+ * 
+ * See LICENSE.md for licensing information
+ */
+
 require('dotenv').config();
 
 const { DnsManagementClient, ARecord } = require("@azure/arm-dns");
@@ -26,18 +36,35 @@ const getWANIP = async () => {
     });
 }
 
-cron.schedule(process.env.CRON_REFRESH_INTERVAL, async () => {
+const do_update = async () => {
     const client = new DnsManagementClient(new ClientSecretCredential(process.env.TENANT_ID, process.env.CLIENT_ID, process.env.CLIENT_SECRET), process.env.AZURE_SUBSCRIPTION_ID);
-    const wanIP = await getWANIP();
-    const result = await client.recordSets.update(
-        process.env.RESOURCE_GROUP_NAME,
-        process.env.ZONE_NAME,
-        process.env.RELATIVE_RECORD_SET_NAME,
-        process.env.RECORD_TYPE,
-        {
-            aRecords: [{ ipv4Address: wanIP }]
-        }
-    );
-    console.log(`Updated WAN IP (${wanIP}) to Azure DNS record ${process.env.RELATIVE_RECORD_SET_NAME}.${process.env.ZONE_NAME}`);
-});
+    
+    // Asynchronously retrieve both the current IP for the target Azure DNS record to be updated and the WAN IP
+    Promise.all([
+        // Retrieve the current value of the target record in Azure DNS to be updated
+        client.recordSets.get(
+            process.env.RESOURCE_GROUP_NAME,
+            process.env.ZONE_NAME,
+            process.env.RELATIVE_RECORD_SET_NAME,
+            process.env.RECORD_TYPE
+        ).then(result => result.aRecords),
+        // Get the WAN IP of the current network by calling to an external IP echo service
+        getWANIP()
+    ]).then(result => {
+        // Normally, we can reduce the verbosity of this equality check (which needs to guard against the ) by using optional chaining (.?) available in Node v14.x and later.
+        // It has instead been designed with two distinct expressions to prevent exclusion of earlier versions of Node unnecessarily
+        if (result[0].length > 0 && result[0].includes(result[1]))
+            client.recordSets.createOrUpdate(
+                process.env.RESOURCE_GROUP_NAME,
+                process.env.ZONE_NAME,
+                process.env.RELATIVE_RECORD_SET_NAME,
+                process.env.RECORD_TYPE,
+                {
+                    aRecords: [{ ipv4Address: wanIP }]
+                }
+            ).then(() => console.log(`Updated current WAN IP (${wanIP}) to Azure DNS ${process.env.RECORD_TYPE} record ${process.env.RELATIVE_RECORD_SET_NAME}.${process.env.ZONE_NAME}`));
+    });
+}
+console.dir(process);
+cron.schedule(process.env.CRON_REFRESH_INTERVAL, do_update);
 console.log(`Scheduled updates to configured Azure DNS record with the cron interval ${process.env.CRON_REFRESH_INTERVAL}`);
