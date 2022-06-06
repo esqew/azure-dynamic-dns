@@ -2,6 +2,7 @@
 > These instructions assume that you already have a working Azure DNS zone. If the specific record targeted by the value you provide in `.env` doesn't exist within the specified DNS zone, it will be created for you.
 
 ### Azure set-up
+<<<<<<< HEAD
 1. Sign in to the [Azure portal](https://portal.azure.com) and [create an App Registration for the daemon](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). Give it a descriptive name (I used `ddns-daemon`) and leave all other settings at their default values, then click *Register*.
 
    This process wil generate a unique `Application (client) ID` and a `Directory (tenant) ID`, which should be displayed on the resulting blade. Save these values for later, you'll need them to successfully configure your daemon.
