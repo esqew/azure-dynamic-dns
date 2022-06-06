@@ -11,7 +11,7 @@ A Node.js-based daemon that refreshes Azure DNS records based on the detected WA
 ### Configurable WAN IP echo service provider
 Currently, the script is pegged to the WAN IP echo service at `https://icanhazip.com`. This presents several potential issues (among others) over the longer-term:
 
-  1. The service can disappear or cease to function as expected at any time (for example, the relatively recent decommissionning of the [WhatIsMyIPAddress.com API](https://whatismyipaddress.com/api))
+  1. The service can disappear or cease to function as expected at any time (for example, the relatively recent decommissioning of the [WhatIsMyIPAddress.com API](https://whatismyipaddress.com/api))
   2. A given IP echo service can be inaccessible or otherwise non-functional in certain geographic regions due to routing issues, deliberate blocking of the services within corporate networks or certain geopolitical areas (i.e., China)
 
   To mitigate these potential pitfalls, better configuration of the provider should be possible on an instance-by-instance basis.
