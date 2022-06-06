@@ -1,0 +1,27 @@
+{
+    "id": "/subscriptions/e3766980-3db3-4faf-bedc-fbe28ae2b58f/providers/Microsoft.Authorization/roleDefinitions/05dee275-8408-452b-83e7-a3bba9e2fae0",
+    "properties": {
+        "roleName": "DNS Record Contributor",
+        "description": "Add or update DNS records within a pre-existing DNS zone",
+        "assignableScopes": [
+            "/subscriptions/e3766980-3db3-4faf-bedc-fbe28ae2b58f"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Network/dnszones/*/read",
+                    "Microsoft.Network/dnszones/*/write",
+                    "Microsoft.Network/dnsoperationresults/read",
+                    "Microsoft.Network/dnsoperationstatuses/read",
+                    "Microsoft.Network/privateDnsZones/*/read",
+                    "Microsoft.Network/privateDnsZones/*/write",
+                    "Microsoft.Network/privateDnsOperationResults/read",
+                    "Microsoft.Network/privateDnsOperationStatuses/read"
+                ],
+                "notActions": [],
+                "dataActions": [],
+                "notDataActions": []
+            }
+        ]
+    }
+}

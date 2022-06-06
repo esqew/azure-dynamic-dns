@@ -2,7 +2,9 @@
 A Node.js-based daemon that refreshes Azure DNS records based on the detected WAN IP of the local network to the executing device. Useful for maintaining up-to-date DNS records which are pointing networks whose WAN IPs are dynamic in nature (think home networks).
 
 ## Installation and configuration
-*To be completed - documentation work is ongoing in the `docs/installation` branch.*
+> *See full instructions in [`doc/installation.md`](./doc/installation.md).*
+
+**TL;DR**: Create a service principal and assign it the `DNS Zone Contributor` role (or the more restrictive role outlined by the included [`dns-record-contributor.json`](./doc/dns-record-contributor.json) role definition). Configure your [`example.env`](./example.env), re-name to `.env`, then daemonize `index.js` with `pm2` (or similar).
 
 ## To-dos
 
