@@ -47,24 +47,28 @@ const do_update = async () => {
             process.env.ZONE_NAME,
             process.env.RELATIVE_RECORD_SET_NAME,
             process.env.RECORD_TYPE
-        ).then(result => result.aRecords),
+        ).then(result => result.aRecords.map(obj => obj.ipv4Address) || []),
         // Get the WAN IP of the current network by calling to an external IP echo service
         getWANIP()
     ]).then(result => {
         // Normally, we can reduce the verbosity of this equality check (which needs to guard against the ) by using optional chaining (.?) available in Node v14.x and later.
         // It has instead been designed with two distinct expressions to prevent exclusion of earlier versions of Node unnecessarily
-        if (result[0].length > 0 && result[0].includes(result[1]))
-            client.recordSets.createOrUpdate(
+        console.dir(result);
+        debugger;
+        if (result[0].length > 0 && !result[0].includes(result[1]))
+            client.recordSets.update(
                 process.env.RESOURCE_GROUP_NAME,
                 process.env.ZONE_NAME,
                 process.env.RELATIVE_RECORD_SET_NAME,
                 process.env.RECORD_TYPE,
                 {
-                    aRecords: [{ ipv4Address: wanIP }]
+                    aRecords: [{ ipv4Address: result[1] }]
                 }
-            ).then(() => console.log(`Updated current WAN IP (${wanIP}) to Azure DNS ${process.env.RECORD_TYPE} record ${process.env.RELATIVE_RECORD_SET_NAME}.${process.env.ZONE_NAME}`));
+            ).then(() => console.log(`Updated current WAN IP (${result[1]}) to Azure DNS ${process.env.RECORD_TYPE} record ${process.env.RELATIVE_RECORD_SET_NAME}.${process.env.ZONE_NAME}`));
+        else
+            console.log(`No update to DNS record necessary - target record value matches current WAN IP (${result[1]})`);
     });
 }
-console.dir(process);
+
 cron.schedule(process.env.CRON_REFRESH_INTERVAL, do_update);
 console.log(`Scheduled updates to configured Azure DNS record with the cron interval ${process.env.CRON_REFRESH_INTERVAL}`);
