@@ -53,8 +53,6 @@ const do_update = async () => {
     ]).then(result => {
         // Normally, we can reduce the verbosity of this equality check (which needs to guard against the ) by using optional chaining (.?) available in Node v14.x and later.
         // It has instead been designed with two distinct expressions to prevent exclusion of earlier versions of Node unnecessarily
-        console.dir(result);
-        debugger;
         if (result[0].length > 0 && !result[0].includes(result[1]))
             client.recordSets.update(
                 process.env.RESOURCE_GROUP_NAME,
