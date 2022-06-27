@@ -10,7 +10,7 @@
 
 require('dotenv').config();
 
-const { DnsManagementClient, ARecord } = require("@azure/arm-dns");
+const { DnsManagementClient } = require("@azure/arm-dns");
 const { ClientSecretCredential } = require("@azure/identity");
 const cron = require('node-cron');
 const https = require('https');
@@ -51,7 +51,7 @@ const do_update = async () => {
         // Get the WAN IP of the current network by calling to an external IP echo service
         getWANIP()
     ]).then(result => {
-        // Normally, we can reduce the verbosity of this equality check (which needs to guard against the ) by using optional chaining (.?) available in Node v14.x and later.
+        // Normally, we can reduce the verbosity of this equality check (which needs to guard against result[0] being zero-length or undefined) by using optional chaining (.?) available in Node v14.x and later.
         // It has instead been designed with two distinct expressions to prevent exclusion of earlier versions of Node unnecessarily
         if (result[0].length > 0 && !result[0].includes(result[1]))
             client.recordSets.update(
