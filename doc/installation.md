@@ -1,5 +1,11 @@
 # Installation
-> These instructions assume that you already have a working Azure DNS zone. If the specific record targeted by the value you provide in `.env` doesn't exist within the specified DNS zone, it will be created for you.
+> These instructions assume that you already have a working Azure DNS zone. If the specific record targeted by the value you provide in `.env` doesn't exist within the specified DNS zone, it will **not** be created for you and will cause errors at runtime.
+
+0. Download this repository to your local filesystem and install the requisite dependencies from `npm`:
+
+       git clone https://github.com/esqew/azure-dynamic-dns
+       cd azure-dynamic-dns
+       npm install
 
 ### Azure set-up
 1. Sign in to the [Azure portal](https://portal.azure.com) and [create an App Registration for the daemon](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). Give it a descriptive name (I used `ddns-daemon`) and leave all other settings at their default values, then click *Register*.
