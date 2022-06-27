@@ -34,6 +34,6 @@ You've now created your service principal, but now you need to grant it access t
 
 7. Using the authentication information generated in steps 1 and 3 above, complete the empty fields in the `example.env` file. Re-name the file to `.env`. Finally, provide values for each of the other configuration parameters as necessary in your installation.
 
-8. Run `node ./index.js --dry-run` to test your configuration and ensure that you don't get any unexpected errors with your current configuration. Rinse and repeat until the output matches your expectation.
+8. Run `node ./dns-daemon.js --dry-run` to test your configuration and ensure that you don't get any unexpected errors with your current configuration. Rinse and repeat until the output matches your expectation.
 
-***Congratulations!*** Your installation is ready to go. You can test the installation by running `node index.js` and waiting for your `cron` interval to hit. Once you're satisfied, you can daemonize the process with `pm2` or a similar utility. Remember to rotate your service principal's app secret at the interval you've specified in Step 3!
+***Congratulations!*** Your installation is ready to go. You can now daemonize the process with `pm2` or a similar utility. Remember to rotate your service principal's app secret at the interval you've specified in Step 3!

@@ -4,7 +4,7 @@ A Node.js-based daemon that refreshes Azure DNS records based on the detected WA
 ## Installation and configuration
 > *See full instructions in [`doc/installation.md`](./doc/installation.md).*
 
-**TL;DR**: Create a service principal and assign it the `DNS Zone Contributor` role (or the more restrictive role outlined by the included [`dns-record-contributor.json`](./doc/dns-record-contributor.json) role definition). Configure your [`example.env`](./example.env), re-name to `.env`, run the script with the `--dry-run` switch to test, then daemonize `index.js` with `pm2` (or any other similar tool you prefer).
+**TL;DR**: Create a service principal and assign it the `DNS Zone Contributor` role (or the more restrictive role outlined by the included [`dns-record-contributor.json`](./doc/dns-record-contributor.json) role definition). Configure your [`example.env`](./example.env), re-name to `.env`, run the script with the `--dry-run` switch to test, then daemonize `dns-daemon.js` with `pm2` (or any other similar tool you prefer).
 
 ## To-dos
 
