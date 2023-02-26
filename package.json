@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/esqew/azure-dynamic-dns.git"
   },
-  "author": "Sean F Quinn <sean@sfq.xyz>",
+  "author": "Sean F Quinn",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/esqew/azure-dynamic-dns/issues"
