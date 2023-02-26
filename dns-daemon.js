@@ -8,9 +8,6 @@
  * See LICENSE.md for licensing information
  */
 
-// Require dotenv package to read and parse .env file containing Azure connection secrets and other pertinent settings
-require('dotenv').config();
-
 // Require official Azure libraries to for abstracted API calls
 const { DnsManagementClient } = require("@azure/arm-dns");
 const { ClientSecretCredential } = require("@azure/identity");
@@ -20,7 +17,6 @@ const cron = require('node-cron');
 
 // Require built-in https module to facilitate communication with WAN IP echo service without adding an additional dependency
 const https = require('https');
-const { symlinkSync } = require('fs');
 
 /**
  * Retrieves the WAN IP from the echo service

@@ -1,12 +1,3 @@
-# Installation
-> These instructions assume that you already have a working Azure DNS zone. If the specific record targeted by the value you provide in `.env` doesn't exist within the specified DNS zone, it will **not** be created for you and will cause errors at runtime.
-
-0. Download this repository to your local filesystem and install the requisite dependencies from `npm`:
-
-       git clone https://github.com/esqew/azure-dynamic-dns
-       cd azure-dynamic-dns
-       npm install
-
 ### Azure set-up
 1. Sign in to the [Azure portal](https://portal.azure.com) and [create an App Registration for the daemon](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). Give it a descriptive name (I used `ddns-daemon`) and leave all other settings at their default values, then click *Register*.
 
@@ -36,4 +27,23 @@ You've now created your service principal, but now you need to grant it access t
 
 8. Run `node ./dns-daemon.js --dry-run` to test your configuration and ensure that you don't get any unexpected errors with your current configuration. Rinse and repeat until the output matches your expectation.
 
-***Congratulations!*** Your installation is ready to go. You can now daemonize the process with `pm2` or a similar utility. Remember to rotate your service principal's app secret at the interval you've specified in Step 3!
+### Docker Compose
+Create a `docker-compose.yml` file in the form below, being sure to add the environment variables as labeled:
+    
+    version: "3"
+    services:
+        azure-dynamic-dns:
+            image: esqew/azure-dynamic-dns
+            container_name: azure-dynamic-dns
+        environment:
+            - AZURE_SUBSCRIPTION_ID=
+            - TENANT_ID=
+            - AZURE_SUBSCRIPTION_ID=
+            - TENANT_ID=
+            - CLIENT_ID=
+            - CLIENT_SECRET=
+            - CRON_REFRESH_INTERVAL=0 * * * *
+            - RESOURCE_GROUP_NAME=
+            - ZONE_NAME=
+            - RELATIVE_RECORD_SET_NAME=
+            - RECORD_TYPE=
