@@ -38,8 +38,6 @@ Create a `docker-compose.yml` file in the form below, being sure to add the envi
         environment:
             - AZURE_SUBSCRIPTION_ID=
             - TENANT_ID=
-            - AZURE_SUBSCRIPTION_ID=
-            - TENANT_ID=
             - CLIENT_ID=
             - CLIENT_SECRET=
             - CRON_REFRESH_INTERVAL=0 * * * *
@@ -47,3 +45,10 @@ Create a `docker-compose.yml` file in the form below, being sure to add the envi
             - ZONE_NAME=
             - RELATIVE_RECORD_SET_NAME=
             - RECORD_TYPE=
+
+### Docker Run
+Alternatively to the Docker Compose configuration above, you can use `docker run` to get the same effect:
+
+    docker run -e AZURE_SUBSCRIPTION_ID="" -e TENANT_ID="" -e CLIENT_ID="" -e CLIENT_SECRET="" -e CRON_REFRESH_INTERVAL="0 * * * *" -e RESOURCE_GROUP_NAME="" -e ZONE_NAME="" -e RELATIVE_RECORD_SET="" -e RECORD_TYPE="" esqew/azure-dynamic-dns
+
+... being sure to replace the blank strings with the appropriate environment variable values.

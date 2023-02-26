@@ -85,6 +85,7 @@ const do_update = async (dry_run = false) => {
     });
 }
 
+console.log(`Starting up...`);
 // if run with the `--dry-run` switch, make sure to pass that to the do_update function to ensure no updates are actually made in the target Azure DNS records
 if (['--dryrun', '--dry-run'].some(value => process.argv.includes(value))) do_update(true);
 else {
