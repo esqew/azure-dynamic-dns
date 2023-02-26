@@ -3,5 +3,26 @@
     "@azure/arm-dns": "^5.0.1",
     "@azure/identity": "^2.0.4",
     "node-cron": "^3.0.0"
-  }
+  },
+  "name": "azure-dynamic-dns",
+  "description": "A Node.js-based daemon that refreshes Azure DNS records based on the detected WAN IP of the local network to the executing device. Useful for maintaining up-to-date DNS records which are pointing networks whose WAN IPs are dynamic in nature (think home networks).",
+  "version": "1.0.0",
+  "main": "dns-daemon.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esqew/azure-dynamic-dns.git"
+  },
+  "author": "Sean F Quinn <sean@sfq.xyz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/esqew/azure-dynamic-dns/issues"
+  },
+  "homepage": "https://github.com/esqew/azure-dynamic-dns#readme"
 }
