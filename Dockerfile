@@ -1,7 +1,7 @@
-FROM node:16
+FROM node:18-alpine3.17
 ENTRYPOINT [ "node" ]
 WORKDIR /usr/src/azure-dynamic-dns
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD [ "dns-daemon.js" ]
+CMD [ "dns-daemon.js", "--trace-uncaught" ]
