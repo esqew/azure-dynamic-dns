@@ -69,6 +69,6 @@ console.log(`Starting up...`);
 if (['--dryrun', '--dry-run'].some(value => process.argv.includes(value))) do_update(true);
 else {
     // schedule the cron job based on how it's configured in .env
-    cron.schedule(process.env.CRON_REFRESH_INTERVAL, () => do_update(false));
+    do_uopdate(false).then(() => cron.schedule(process.env.CRON_REFRESH_INTERVAL, () => do_update(false)));
     console.log(`Scheduled updates to configured Azure DNS record with the cron interval ${process.env.CRON_REFRESH_INTERVAL}`);
 }
