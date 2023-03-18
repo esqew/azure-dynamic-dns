@@ -1,6 +1,7 @@
 FROM node:18-alpine3.17
 ENTRYPOINT [ "node" ]
-WORKDIR /usr/src/azure-dynamic-dns
+WORKDIR /app
+COPY ./config ./
 COPY package*.json ./
 RUN npm update -g npm
 RUN npm install
