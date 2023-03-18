@@ -1,0 +1,17 @@
+[
+    {
+        "name": "icanhazip",
+        "method": "https",
+        "url": "https://icanhazip.com"
+    },
+    {
+        "name": "ipecho",
+        "method": "https",
+        "url": "https://ipecho.net/plain"
+    },
+    {
+        "name": "ipify",
+        "method": "https",
+        "url": "https://api.ipify.org"
+    }
+]
