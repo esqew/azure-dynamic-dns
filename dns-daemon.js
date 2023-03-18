@@ -52,7 +52,7 @@ const do_update = async (dry_run = false) => {
                 client.recordSets.update(
                     process.env.RESOURCE_GROUP_NAME,
                     process.env.ZONE_NAME,
-                    process.env.RELATIVE_RECORD_SET_NAME,
+                    process.env.RELATIVE_RECORD_SET,
                     process.env.RECORD_TYPE,
                     {
                         aRecords: [{ ipv4Address: result[1] }]
