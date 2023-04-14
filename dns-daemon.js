@@ -57,18 +57,18 @@ const do_update = async (dry_run = false) => {
                     {
                         aRecords: [{ ipv4Address: result[1] }]
                     }
-                ).then(() => console.log(`Updated current WAN IP (${result[1]}) to Azure DNS ${process.env.RECORD_TYPE} record ${process.env.RELATIVE_RECORD_SET}.${process.env.ZONE_NAME}`));
+                ).then(() => console.log(`[${new Date().toISOString()}] Updated current WAN IP (${result[1]}) to Azure DNS ${process.env.RECORD_TYPE} record ${process.env.RELATIVE_RECORD_SET}.${process.env.ZONE_NAME}`));
             }
         }
-        else console.log(`${dry_run ? '[DRY RUN] ' : ''}No update to DNS record necessary - target record value matches current WAN IP (${result[1]})`);
+        else console.log(`${dry_run ? '[DRY RUN] ' : ''}[${new Date().toISOString()}] No update to DNS record necessary - target record value matches current WAN IP (${result[1]})`);
     });
 }
 
-console.log(`Starting up...`);
+console.log(`[${new Date().toISOString()}] Starting up...`);
 // if run with the `--dry-run` switch, make sure to pass that to the do_update function to ensure no updates are actually made in the target Azure DNS records
 if (['--dryrun', '--dry-run'].some(value => process.argv.includes(value))) do_update(true);
 else {
     // schedule the cron job based on how it's configured in .env
     do_update(false).then(() => cron.schedule(process.env.CRON_REFRESH_INTERVAL, () => do_update(false)));
-    console.log(`Scheduled updates to configured Azure DNS record with the cron interval ${process.env.CRON_REFRESH_INTERVAL}`);
+    console.log(`[${new Date().toISOString()}] Scheduled updates to configured Azure DNS record with the cron interval ${process.env.CRON_REFRESH_INTERVAL}`);
 }
